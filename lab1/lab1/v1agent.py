@@ -15,6 +15,9 @@ class V1Agent(VacuumAgent):
 
     def execute(self, percept): 
 
+        # Standard pattern for dealing with depleted battery -- repeated
+        # in all agents
+        
         if self.battery_level <= 0:
             if self.battery_level != -999:
                 self.log("Battery level is now 0. Halting!")
@@ -36,6 +39,7 @@ class V1Agent(VacuumAgent):
         else:
                 action = ACTION_TURN_RIGHT
         
-        # Compute battery level and score
+        # Need to notify superclass to update
+        # score and battery usage
         self.step_update(action, percept)
         return action

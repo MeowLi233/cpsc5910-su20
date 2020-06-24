@@ -7,16 +7,16 @@ from lab1.agentstate import UNKNOWN, WALL, EDGE, DIRT, CLEAN
 from lab1.agentstate import FORWARD, LEFT, RIGHT
           
 """
-V5 agent -- placeholder for best possible agent with "world model"
+V7 agent -- placeholder for agent with "go home" feature
 """
 
-VERSION = "V5"
+VERSION = "V7"
 
 DEFAULT_INITIAL_X = 1
 DEFAULT_INITIAL_Y = 1
 DEFAULT_INITIAL_DIRECTION = EAST
-       
-class V5Agent(VacuumAgent):
+
+class V7Agent(VacuumAgent):
 
     def __init__(self, world_width, world_height, log, battery=300):
         super().__init__(VERSION, world_width, world_height, log, battery, self.execute)

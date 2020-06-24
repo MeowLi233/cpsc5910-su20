@@ -1,4 +1,3 @@
-from random import random
 from tkinter import Tk, Frame, Button, BOTH, OptionMenu, StringVar, Text, END, PhotoImage
 from lab1.liuvacuum import LIUVacuumEnvironment, ENV_CLEAN, ENV_DIRTY, ENV_WALL
 from lab1.v1agent import V1Agent
@@ -6,6 +5,8 @@ from lab1.v2agent import V2Agent
 from lab1.v3agent import V3Agent
 from lab1.v4agent import V4Agent
 from lab1.v5agent import V5Agent
+from lab1.v6agent import V6Agent
+from lab1.v7agent import V7Agent
 
 DIRT_BIAS = 0.5
 WALL_BIAS = 0.0
@@ -63,20 +64,16 @@ class Lab1:
         # Environment size option menu
         self.grid_dims_getter = self.create_selection_menu(
             self.update_all,
-
             # Menu options: Generates tuples of the shape ("AxB", (A, B)) from a provided tuple (A, B)
             *[(str(size[1]) + "x" + str(size[0]), size) for size in
               [(20, 20)]]
-              #[(5, 5), (10, 10), (15, 15), (20, 20), (5, 10), (10, 5)]]
-            
+              #[(5, 5), (10, 10), (15, 15), (20, 20), (5, 10), (10, 5)]]   
         )
 
         # Environment wall bias
         self.wall_bias_getter = self.create_selection_menu(
             self.update_all,
-
-            # Menu options: Generates tuples of the shape ("foo", foo) from a provided value foo
-            *[(str(bias), bias) for bias in [0.0, 0.1, 0.2, 0.5]]
+            *[(str(bias), bias) for bias in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]]
         )
 
         # Environment dirt bias
@@ -84,7 +81,7 @@ class Lab1:
             self.update_all,
 
             # Menu options: See environment wall bias menu options
-            *[(str(bias), bias) for bias in [0.1, 0.2, 0.5]]
+            *[(str(bias), bias) for bias in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]]
         )
 
         # Environment dirt distribution
@@ -108,7 +105,7 @@ class Lab1:
             self.update_all,
 
             # Menu options
-            ("V1", 0), ("V2", 1), ("V3", 2), ("V4", 3), ("V5", 4),
+            ("V1", 0), ("V2", 1), ("V3", 2), ("V4", 3), ("V5", 4), ("V6", 5), ("V7", 6),
  
             always_trigger_onselect=True
         )
@@ -475,7 +472,10 @@ class Lab1:
                   V2Agent(*self.grid_dims_getter(), self.append_log),
                   V3Agent(*self.grid_dims_getter(), self.append_log),
                   V4Agent(*self.grid_dims_getter(), self.append_log),
-                  V5Agent(*self.grid_dims_getter(), self.append_log)]
+                  V5Agent(*self.grid_dims_getter(), self.append_log),
+                  V6Agent(*self.grid_dims_getter(), self.append_log),
+                  V7Agent(*self.grid_dims_getter(), self.append_log),
+                  ]
         agent = agents[selected_agent]
         venv.add_thing(agent)
         self.agent = agent

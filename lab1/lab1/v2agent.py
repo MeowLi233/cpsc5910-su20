@@ -3,7 +3,7 @@ from lab1.vacuumagent import VacuumAgent
 from lab1.liuvacuum import ACTION_TURN_LEFT, ACTION_TURN_RIGHT, ACTION_FORWARD, ACTION_SUCK, ACTION_NOP
 
 """
-Simple Reactive Vacuum agent, responds to DIRT and BUMP percepts
+Simple Reactive Vacuum agent, uses its DIRT sensor to suck only when necessary
 """
 
 VERSION = "V2"
@@ -14,7 +14,6 @@ class V2Agent(VacuumAgent):
         super().__init__(VERSION, world_width, world_height, log, battery, self.execute)
 
     def execute(self, percept):
-        bump = percept.attributes["bump"]
         dirt = percept.attributes["dirt"]
 
         if self.battery_level <= 0:
@@ -29,13 +28,6 @@ class V2Agent(VacuumAgent):
         if dirt:
             action = ACTION_SUCK
         else:
-            if bump:
-                random_turn_action = randint(1,2)
-                if random_turn_action == 1:
-                    action = ACTION_TURN_LEFT
-                else:
-                    action = ACTION_TURN_RIGHT
-            else:
-                action = ACTION_FORWARD
+            action = [ACTION_FORWARD, ACTION_TURN_LEFT, ACTION_TURN_RIGHT][randint(0,2)]
         self.step_update(action, percept)
         return action

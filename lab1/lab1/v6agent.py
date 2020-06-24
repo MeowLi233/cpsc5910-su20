@@ -7,7 +7,7 @@ from lab1.agentstate import UNKNOWN, WALL, EDGE, DIRT, CLEAN
 from lab1.agentstate import FORWARD, LEFT, RIGHT
           
 """
-V6 agent -- placeholder for agent that deals with non-uniform dirt
+V6 agent -- placeholder for agent with "go home" feature
 """
 
 VERSION = "V6"

@@ -7,7 +7,6 @@ from lab1.v3agent import V3Agent
 from lab1.v4agent import V4Agent
 from lab1.v5agent import V5Agent
 from lab1.v6agent import V6Agent
-from lab1.v7agent import V7Agent
 
 
 from lab1.liuvacuum import ACTION_NOP
@@ -43,7 +42,7 @@ class VacuumSimulation:
         return self.agent.score()
 
 #########################
-### This runs the same simulation on seven different agents.
+### This runs the same simulation on six different agents.
 
 agents = [V1Agent(20, 20, log_null, 300), 
           V2Agent(20, 20, log_null, 300),
@@ -51,7 +50,6 @@ agents = [V1Agent(20, 20, log_null, 300),
           V4Agent(20, 20, log_null, 300),
           V5Agent(20, 20, log_null, 300),
           V6Agent(20, 20, log_null, 300),
-          V7Agent(20, 20, log_null, 300),
           ]
 
 

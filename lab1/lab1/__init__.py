@@ -6,7 +6,6 @@ from lab1.v3agent import V3Agent
 from lab1.v4agent import V4Agent
 from lab1.v5agent import V5Agent
 from lab1.v6agent import V6Agent
-from lab1.v7agent import V7Agent
 
 DIRT_BIAS = 0.5
 WALL_BIAS = 0.0
@@ -105,7 +104,7 @@ class Lab1:
             self.update_all,
 
             # Menu options
-            ("V1", 0), ("V2", 1), ("V3", 2), ("V4", 3), ("V5", 4), ("V6", 5), ("V7", 6),
+            ("V1", 0), ("V2", 1), ("V3", 2), ("V4", 3), ("V5", 4), ("V6", 5),
  
             always_trigger_onselect=True
         )
@@ -473,8 +472,7 @@ class Lab1:
                   V3Agent(*self.grid_dims_getter(), self.append_log),
                   V4Agent(*self.grid_dims_getter(), self.append_log),
                   V5Agent(*self.grid_dims_getter(), self.append_log),
-                  V6Agent(*self.grid_dims_getter(), self.append_log),
-                  V7Agent(*self.grid_dims_getter(), self.append_log),
+                  V6Agent(*self.grid_dims_getter(), self.append_log)
                   ]
         agent = agents[selected_agent]
         venv.add_thing(agent)

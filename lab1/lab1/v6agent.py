@@ -16,6 +16,8 @@ DEFAULT_INITIAL_X = 1
 DEFAULT_INITIAL_Y = 1
 DEFAULT_INITIAL_DIRECTION = EAST
 
+HOME_BONUS = 500
+
 class V6Agent(VacuumAgent):
 
     def __init__(self, world_width, world_height, log, battery=300):
@@ -27,6 +29,10 @@ class V6Agent(VacuumAgent):
                                 DEFAULT_INITIAL_DIRECTION)
         self.log = log
 
+    def score(self):
+        bonus = HOME_BONUS if (self.state.pos_x, self.state.pos_y) == (1,1) else 0
+        return super().score() + bonus
+    
     def execute(self, percept):
         
         if self.battery_level <= 0:
@@ -38,6 +44,7 @@ class V6Agent(VacuumAgent):
             self.step_update(ACTION_NOP, percept)
             return ACTION_NOP
         
+        log(str(self.battery_level))
         action = ACTION_NOP
         self.step_update(action, percept)
         self.state.update_action(action)

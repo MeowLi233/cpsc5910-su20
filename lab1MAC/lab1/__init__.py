@@ -39,6 +39,10 @@ class Lab1:
         self.agent_img[(-1, 0)] = PhotoImage(file="images/agent_west.png")
         self.agent_img[(0, -1)] = PhotoImage(file="images/agent_north.png")
 
+        self.images = {ENV_CLEAN: PhotoImage(file="images/blank.png"),
+                       ENV_DIRTY: PhotoImage(file="images/dirt.png"),
+                       ENV_WALL:  PhotoImage(file="images/wall.png")}
+  
         self.blank_img = PhotoImage(file="images/blank.png")
         
         # The outermost frame within which everything is contained
@@ -181,25 +185,23 @@ class Lab1:
         self.log.configure(state="normal")
         self.log.replace("0.0", END, "")
         self.log.configure(state="disabled")
-        
+
     def refresh_tile(self, x, y):
         """
         Change color of a drawn tile to match environment model.
+
         :param x: X-coordinate of tile
         :param y: Y-coordinate of tile
         :return: None
         """
 
         # Get current state of tile in environment
-        state = self.vacuum_env.world[x][y]
-        new_state =  WORLD_COLOR_CLEAN  if state == ENV_CLEAN\
-                else WORLD_COLOR_DIRTY  if state == ENV_DIRTY\
-                else WORLD_COLOR_WALL
+        new_image = self.images[self.vacuum_env.world[x][y]]
 
         # Apply color to tile (if necessary)
-        if new_state != self.grid[x][y].cget("bg"):
-            self.grid[x][y].configure(bg=new_state)
-            
+        if new_image != self.grid[x][y].cget("image"):
+            self.grid[x][y].configure(image=new_image)
+
     def refresh(self):
         """
         Change color of all drawn tiles to match environment model.

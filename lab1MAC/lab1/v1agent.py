@@ -29,22 +29,18 @@ class V1Agent(VacuumAgent):
         #  Choose SUCK 50% of the time, FORWARD 30%, then 
         #  LEFT and RIGHT 10% each
         
-        dirt = percept.attributes["dirt"]
-        bump = percept.attributes["bump"]
-        action = None
-        
-        if dirt:
-            action = ACTION_SUCK
-        else:
-            r = randint(1,3)
-            if r == 1:
+        r = randint(1,10)
+        if r <= 5:
+                action = ACTION_SUCK
+        elif r <= 8:
                 action = ACTION_FORWARD
-            elif r ==2:
+        elif r <= 9:
                 action = ACTION_TURN_LEFT
-            else:
+        else:
                 action = ACTION_TURN_RIGHT
         
         # Need to notify superclass to update
         # score and battery usage
         self.step_update(action, percept)
         return action
+    

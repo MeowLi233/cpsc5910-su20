@@ -43,18 +43,22 @@ class VacuumSimulation:
         return self.agent.score()
 
 #########################
-# Iterate many times:
-#   Create a 
 
-def run_agents_in_environment(agents, 
-                              dirt_density, 
+def run_agents_in_environment(dirt_density, 
                               wall_density, 
                               num_samples = 100, 
                               output_file_name = 'simulation_results.csv',
                               print_results_to_console = False):
     with open(output_file_name, 'w') as output_file:
-        for i in range(1, num_samples):
+        for i in range(0, num_samples):
             seed = randint(1,10000)
+            agents = [#V1Agent(20, 20, log_null, 300), 
+                    #V2Agent(20, 20, log_null, 300),
+                    V3Agent(20, 20, log_null, 300),
+                    V4Agent(20, 20, log_null, 300),
+                    #V5Agent(20, 20, log_null, 300),
+                    #V6Agent(20, 20, log_null, 300),
+                    ]
             for a in agents:
                 v = VacuumSimulation(a, dirt_density, wall_density, seed)
                 v.run()
@@ -62,20 +66,11 @@ def run_agents_in_environment(agents,
                 if print_results_to_console:
                     print(f"{a.version},{dirt_density},{wall_density},{a.score()}")
 
-
 #######################################
-                    
-agents = [#V1Agent(20, 20, log_null, 300), 
-          #V2Agent(20, 20, log_null, 300),
-          V3Agent(20, 20, log_null, 300),
-          V4Agent(20, 20, log_null, 300),
-          #V5Agent(20, 20, log_null, 300),
-          #V6Agent(20, 20, log_null, 300),
-          ]
-
 
 dirt_density = 0.3
 wall_density = 0.3
+NUM_SAMPLES = 100
 output_file_name = 'simulation_results.csv'
 
-run_agents_in_environment(agents, dirt_density, wall_density, 100, output_file_name, True)
+run_agents_in_environment(dirt_density, wall_density, NUM_SAMPLES, output_file_name, True)
